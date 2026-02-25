@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>青灯不弈的汉化小结</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="wrap">
+    <div class="hero">
+      <div class="title">
+        <h1>青灯不弈的汉化小结</h1>
+        <p class="subtitle">个人汉化工作汇总 · 可搜索筛选 · 静态站（适配 GitHub Pages）</p>
+      </div>
+
+      <nav class="links" aria-label="外部主页">
+        <a class="chip" href="https://space.bilibili.com/95687310" target="_blank" rel="noopener">
+          <img alt="B站" src="https://www.bilibili.com/favicon.ico" />
+          <span>B站主页</span>
+        </a>
+        <a class="chip" href="https://weibo.com/5082872852" target="_blank" rel="noopener">
+          <img alt="微博" src="https://weibo.com/favicon.ico" />
+          <span>微博主页</span>
+        </a>
+        <a class="chip" href="https://afdian.com/a/qingdengbuyi" target="_blank" rel="noopener">
+          <img alt="爱发电" src="https://afdian.com/static/img/logo.png" />
+          <span>爱发电</span>
+        </a>
+      </nav>
+    </div>
+
+    <section class="controls" aria-label="搜索与筛选">
+      <div class="control span2">
+        <label for="q">搜索</label>
+        <input id="q" type="search" placeholder="按游戏名 / 作者 / 要素 / 汉化成员 / 备注等搜索…" />
+      </div>
+
+      <div class="control">
+        <label for="type">类型</label>
+        <select id="type"><option value="">全部</option></select>
+      </div>
+
+      <div class="control">
+        <label for="degree">汉化程度</label>
+        <select id="degree"><option value="">全部</option></select>
+      </div>
+
+      <div class="control">
+        <label for="age">年龄分级</label>
+        <select id="age"><option value="">全部</option></select>
+      </div>
+
+      <div class="control">
+        <label for="sort">排序</label>
+        <select id="sort">
+          <option value="date_desc">发布时间（新→旧）</option>
+          <option value="date_asc">发布时间（旧→新）</option>
+          <option value="name_asc">汉化名（A→Z）</option>
+          <option value="author_asc">作者（A→Z）</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="status" id="status"></div>
+  </header>
+
+  <main class="wrap">
+    <div class="tableWrap">
+      <table class="table" aria-label="汉化汇总表">
+        <thead>
+          <tr>
+            <th class="col-shot">截图</th>
+            <th class="col-name">汉化名</th>
+            <th class="col-ori">游戏原名</th>
+            <th class="col-author">作者</th>
+            <th class="col-meta">类型 / 分级 / 程度</th>
+            <th class="col-date">发布时间</th>
+            <th class="col-links">链接</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <dialog id="viewer" class="viewer">
+    <button class="viewerClose" id="viewerClose" aria-label="关闭">×</button>
+    <img id="viewerImg" alt="截图预览" />
+  </dialog>
+
+  <footer class="wrap footer">
+    <div>© <span id="year"></span> 青灯不弈</div>
+    <div class="muted">数据来自 <code>data.json</code>（由「汉化汇总.xlsx」导出）。部署到 GitHub Pages 可直接使用。</div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
