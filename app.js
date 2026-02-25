@@ -54,14 +54,18 @@ function buildBadges(r){
 
 function buildDetails(r){
   const kv = [];
-  const add = (k, v, isLink) => {
+  const urlRe = /(https?:\/\/[^\s<>"']+)/g;
+
+  const linkify = (text)=>{
+    const s = safeText(text).trim();
+    if(!s){ return ""; }
+    return s.replace(urlRe, (u)=>`<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+  };
+
+  const add = (k, v) => {
     const val = safeText(v).trim();
     if(!val){ return; }
-    if(isLink){
-      kv.push(`<div class="k">${k}</div><div class="v"><a href="${val}" target="_blank" rel="noopener">${val}</a></div>`);
-      return;
-    }
-    kv.push(`<div class="k">${k}</div><div class="v">${val}</div>`);
+    kv.push(`<div class="k">${k}</div><div class="v">${linkify(val)}</div>`);
   };
 
   add("要素", r["要素"]);
@@ -71,9 +75,19 @@ function buildDetails(r){
   add("汉化成员", r["汉化成员"]);
   add("是否授权", r["是否有授权/许可"]);
   add("备注", r["备注"]);
-  add("原版地址", r["原版游戏地址"], true);
-  add("发布地址", r["汉化发布地址"], true);
-  add("发布微博", r["汉化发布微博"], true);
+  add("原版游戏地址", r["原版游戏地址"]);
+  add("汉化发布地址", r["汉化发布地址"]);
+  add("汉化发布微博", r["汉化发布微博"]);
+
+  const shown = new Set(["要素","游戏价格","游戏时长","原版语言","汉化成员","是否有授权/许可","备注","原版游戏地址","汉化发布地址","汉化发布微博"]);
+  for(const key of Object.keys(r)){
+    if(key.startsWith("__")){ continue; }
+    if(shown.has(key)){ continue; }
+    if(key === "游戏原名" || key === "汉化名" || key === "作者" || key === "游戏类型" || key === "年龄分级" || key === "汉化程度" || key === "汉化发布时间"){ continue; }
+    const val = safeText(r[key]).trim();
+    if(!val){ continue; }
+    kv.push(`<div class="k">${key}</div><div class="v">${linkify(val)}</div>`);
+  }
 
   if(kv.length === 0){ return ""; }
 

@@ -34,3 +34,8 @@
 
 ## 更新数据
 你只需要替换 data.json 和 images/（或重新用同样流程从新的 xlsx 导出）。
+
+
+## GitHub Pages 注意
+- 建议在仓库根目录放置 index.html / app.js / styles.css / data.json / images/
+- 在仓库根目录放一个空文件 `.nojekyll`，避免 GitHub Pages 的 Jekyll 处理影响静态资源
